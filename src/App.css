@@ -71,7 +71,10 @@ input[type="text"] {
 input:not(:focus) {
   background: white;
 }
-
+button.close {
+  margin: 20px 0;
+  background-color: #323232;
+}
 .sticky {
   overflow: hidden;
   background: #1b1b1b;
@@ -98,13 +101,14 @@ input:not(:focus) {
   overflow: auto;
   padding: 20px;
 }
-.panel_details {
-  flex: 3;
+.panel > h2 {
+  padding: 0;
+  font-size: 1.5rem;
+  color: #eff094;
 }
-.panel_logs {
-  flex: 1;
-  word-wrap: break-word;
-  font-family: "Courier New", Courier, monospace;
+.panel-header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .config {

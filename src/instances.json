@@ -1,0 +1,32 @@
+[
+  {
+    "InstanceId": "i-0abc123def456ghi",
+    "InstanceType": "t2.micro",
+    "PrivateIP": "10.0.0.1",
+    "CreateDate": "2023-04-01T12:00:00Z",
+    "AZ": "us-west-2a",
+    "CreatorName": "John Doe",
+    "HostName": "example-instance-1",
+    "RoleType": "dbsql"
+  },
+  {
+    "InstanceId": "i-1def234ghi567jkl",
+    "InstanceType": "t2.small",
+    "PrivateIP": "10.0.0.2",
+    "CreateDate": "2023-04-02T12:00:00Z",
+    "AZ": "us-west-2b",
+    "CreatorName": "Jane Smith",
+    "HostName": "example-instance-2",
+    "RoleType": "dbsql"
+  },
+  {
+    "InstanceId": "i-2ghi345jkl678mno",
+    "InstanceType": "t2.medium",
+    "PrivateIP": "10.0.0.3",
+    "CreateDate": "2023-04-03T12:00:00Z",
+    "AZ": "us-west-2c",
+    "CreatorName": "Alice Johnson",
+    "HostName": "example-instance-3",
+    "RoleType": "dbsql"
+  },
+  

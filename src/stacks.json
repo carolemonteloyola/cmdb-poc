@@ -1,0 +1,42 @@
+[
+  {
+    "StackName": "WebAppStack",
+    "ConfigType": "Production",
+    "Environment": "AWS",
+    "SQLVersion": "MySQL 8.0",
+    "Timestamp": "2023-04-01T12:00:00Z",
+    "CreatorName": "John Doe"
+  },
+  {
+    "StackName": "DataProcessingStack",
+    "ConfigType": "Development",
+    "Environment": "Azure",
+    "SQLVersion": "PostgreSQL  13",
+    "Timestamp": "2023-04-02T12:00:00Z",
+    "CreatorName": "Jane Smith"
+  },
+  {
+    "StackName": "BackendServicesStack",
+    "ConfigType": "Staging",
+    "Environment": "Google Cloud",
+    "SQLVersion": "SQL Server  2019",
+    "Timestamp": "2023-04-03T12:00:00Z",
+    "CreatorName": "Alice Johnson"
+  },
+  {
+    "StackName": "FrontendInfrastructureStack",
+    "ConfigType": "Production",
+    "Environment": "AWS",
+    "SQLVersion": "MySQL  8.0",
+    "Timestamp": "2023-04-04T12:00:00Z",
+    "CreatorName": "Bob Brown"
+  },
+  {
+    "StackName": "MonitoringServicesStack",
+    "ConfigType": "Development",
+    "Environment": "Azure",
+    "SQLVersion": "PostgreSQL  13",
+    "Timestamp": "2023-04-05T12:00:00Z",
+    "CreatorName": "Charlie Davis"
+  }
+]
