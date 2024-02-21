@@ -1,7 +1,7 @@
 import "./App.css";
 
-import Instances from "./Instances";
-import Stacks from "./Stacks";
+import Instances from "./components/Instances";
+import StacksList from "./components/StacksList";
 import { useState } from "react";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
       </nav>
 
       <div className="container">
-        <Stacks handleClick={handleClick} />
+        <StacksList handleClick={handleClick} />
         {showInstances && <Instances closeInstance={closeInstance} />}
       </div>
     </>

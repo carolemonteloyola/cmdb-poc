@@ -1,5 +1,6 @@
 [
   {
+    "id": "1",
     "StackName": "WebAppStack",
     "ConfigType": "Production",
     "Environment": "AWS",
@@ -8,6 +9,7 @@
     "CreatorName": "John Doe"
   },
   {
+    "id": "2",
     "StackName": "DataProcessingStack",
     "ConfigType": "Development",
     "Environment": "Azure",
@@ -16,6 +18,7 @@
     "CreatorName": "Jane Smith"
   },
   {
+    "id": "3",
     "StackName": "BackendServicesStack",
     "ConfigType": "Staging",
     "Environment": "Google Cloud",
@@ -24,6 +27,7 @@
     "CreatorName": "Alice Johnson"
   },
   {
+    "id": "4",
     "StackName": "FrontendInfrastructureStack",
     "ConfigType": "Production",
     "Environment": "AWS",
@@ -32,6 +36,7 @@
     "CreatorName": "Bob Brown"
   },
   {
+    "id": "5",
     "StackName": "MonitoringServicesStack",
     "ConfigType": "Development",
     "Environment": "Azure",
