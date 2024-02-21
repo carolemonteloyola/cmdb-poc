@@ -39,9 +39,6 @@ const Instances = ({ closeInstance }) => {
       <div className="panel-instance-section">
         <div className="panel-header panel-flex-row">
           <h2>Instance Details</h2>
-          <button className="close" onClick={closeInstance}>
-            X
-          </button>
         </div>
 
         <div className="config_container">
@@ -117,6 +114,11 @@ const Instances = ({ closeInstance }) => {
         <div className="panel-header">
           <h2>History</h2>
         </div>
+      </div>
+      <div className="panel-header panel-flex-col">
+        <button className="close" onClick={closeInstance}>
+          X
+        </button>
       </div>
     </div>
   );

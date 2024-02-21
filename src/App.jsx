@@ -14,6 +14,7 @@ function App() {
   };
   const closeInstance = () => {
     setShowInstances(false);
+    setSelectedRow();
   };
 
   return (
