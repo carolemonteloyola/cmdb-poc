@@ -14,7 +14,7 @@ const StacksList = ({ handleClick, selectedRow }) => {
   }); */
 
   return (
-    <div className="panel panel-stacks">
+    <div className="panel panel-flex panel-flex-col panel-stacks">
       <h2>Stacks</h2>
 
       <table>

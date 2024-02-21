@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #202020;
+  background-color: #7e909a;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -43,46 +43,40 @@ table {
 }
 
 table thead {
-  background-color: #333;
-  color: white;
+  color: #1c4e80;
 }
 
 table thead th {
   padding: 10px;
   text-align: left;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid #1c4e80;
 }
 
 table tbody tr:hover {
-  background-color: #444444;
+  background-color: #f1f1f1;
 }
 
 table tbody td {
   padding: 10px;
-  border-bottom: 1px solid #444444;
+  border-bottom: 1px solid #7e909a;
 }
 
-input[type="text"] {
-  font-size: 1.5rem;
-  background: white;
-  color: #1a1a1a;
-  border: 1px solid #1a1a1a;
-}
-input:not(:focus) {
-  background: white;
-}
 button.close {
   margin: 20px 0;
-  background-color: #323232;
+  background-color: #f1f1f1;
+  color: #7e909a;
 }
 .sticky {
   overflow: hidden;
-  background: #1b1b1b;
+  background: #1c4e80;
   position: fixed;
   top: 0;
   left: 0;
   text-align: left;
   width: 100%;
+}
+.sticky h1 {
+  color: #f1f1f1;
 }
 
 .sticky + .container {
@@ -95,21 +89,41 @@ button.close {
   height: 95vh; /* Full height of the browser */
 }
 .panel {
-  background: #323232;
-  flex: 1;
-  gap: 20px;
+  background: #ffffff;
   overflow: auto;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
   margin-bottom: 10px;
-  height: 45%;
+}
+.panel-flex {
+  display: flex;
+  gap: 10px;
+}
+.panel-flex-col {
+  flex-direction: column;
+}
+.panel-flex-row {
+  flex-direction: row;
 }
 .panel h2 {
   padding: 0;
   font-size: 1.5rem;
-  color: #eff094;
 }
+
+.panel-stacks {
+  height: 40%;
+}
+.panel-instances {
+  height: 50%;
+}
+
+.panel-instance-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px 0;
+  height: 50%;
+}
+
 .panel-header {
   display: flex;
   justify-content: space-between;
@@ -136,7 +150,10 @@ button.close {
   width: 40%;
 }
 .selected {
-  background-color: #444444; /* Or any color you prefer */
+  background-color: #a5d8dd; /* Or any color you prefer */
+}
+.highlight {
+  color: #ea6a47; /* Or any color you prefer */
 }
 
 /* index.css */
