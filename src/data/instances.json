@@ -7,7 +7,17 @@
     "AZ": "us-west-2a",
     "CreatorName": "John Doe",
     "HostName": "example-instance-1",
-    "RoleType": "dbsql"
+    "RoleType": "dbsql",
+    "ConfigType": "TESTING-NO-MONITORING",
+    "DiskSizeOfDDrive": 101,
+    "DiskSizeOfEDrive": 101,
+    "DiskSizeOfFDrive": 101,
+    "DiskSizeOfGDrive": 101,
+    "DiskSizeOfMDrive": 101,
+    "Environment": "INTEGRATION",
+    "NameOfCRecordForServer": "TestSQL-1MS001",
+    "NameOfCRecordsAdditional": "none",
+    "SQLVersion": "SQL2019_Dev"
   },
   {
     "InstanceId": "i-1def234ghi567jkl",
@@ -17,7 +27,17 @@
     "AZ": "us-west-2b",
     "CreatorName": "Jane Smith",
     "HostName": "example-instance-2",
-    "RoleType": "dbsql"
+    "RoleType": "dbsql",
+    "ConfigType": "TESTING-NO-MONITORING",
+    "DiskSizeOfDDrive": 100,
+    "DiskSizeOfEDrive": 100,
+    "DiskSizeOfFDrive": 100,
+    "DiskSizeOfGDrive": 100,
+    "DiskSizeOfMDrive": 100,
+    "Environment": "INTEGRATION",
+    "NameOfCRecordForServer": "TestSQL-1MS001",
+    "NameOfCRecordsAdditional": "none",
+    "SQLVersion": "SQL2019_Dev"
   },
   {
     "InstanceId": "i-2ghi345jkl678mno",
@@ -27,6 +47,16 @@
     "AZ": "us-west-2c",
     "CreatorName": "Alice Johnson",
     "HostName": "example-instance-3",
-    "RoleType": "dbsql"
-  },
-  
+    "RoleType": "dbsql",
+    "ConfigType": "TESTING-NO-MONITORING",
+    "DiskSizeOfDDrive": 100,
+    "DiskSizeOfEDrive": 100,
+    "DiskSizeOfFDrive": 100,
+    "DiskSizeOfGDrive": 100,
+    "DiskSizeOfMDrive": 100,
+    "Environment": "INTEGRATION",
+    "NameOfCRecordForServer": "TestSQL-1MS001",
+    "NameOfCRecordsAdditional": "none",
+    "SQLVersion": "SQL2019_Dev"
+  }
+]

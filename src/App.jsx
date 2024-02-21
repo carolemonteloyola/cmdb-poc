@@ -6,9 +6,11 @@ import { useState } from "react";
 
 function App() {
   const [showInstances, setShowInstances] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
 
-  const handleClick = () => {
+  const handleClick = (rowId) => {
     setShowInstances(true);
+    setSelectedRow(rowId);
   };
   const closeInstance = () => {
     setShowInstances(false);
@@ -21,7 +23,7 @@ function App() {
       </nav>
 
       <div className="container">
-        <StacksList handleClick={handleClick} />
+        <StacksList handleClick={handleClick} selectedRow={selectedRow} />
         {showInstances && <Instances closeInstance={closeInstance} />}
       </div>
     </>

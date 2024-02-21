@@ -90,7 +90,6 @@ button.close {
 }
 .container {
   justify-content: flex-start; /* Align panels to the left of the view */
-  display: flex;
   gap: 10px;
   width: 100vw;
   height: 95vh; /* Full height of the browser */
@@ -98,19 +97,18 @@ button.close {
 .panel {
   background: #323232;
   flex: 1;
+  gap: 20px;
   overflow: auto;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  height: 45%;
 }
 .panel h2 {
   padding: 0;
   font-size: 1.5rem;
   color: #eff094;
-}
-.panel-stacks {
-  flex: 2;
-}
-.panel-instance {
-  flex: 1;
 }
 .panel-header {
   display: flex;
@@ -136,6 +134,9 @@ button.close {
 .table_instance tr td:first-child {
   font-weight: bold;
   width: 40%;
+}
+.selected {
+  background-color: #444444; /* Or any color you prefer */
 }
 
 /* index.css */
