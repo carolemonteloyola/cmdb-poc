@@ -114,12 +114,13 @@ button.close {
 
 .panel-header {
   display: flex;
-  justify-content: space-between;
 }
 .panel-instance-section {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+
+  column-gap: 10px;
+  row-gap: 10px;
   height: 50%;
 }
 
@@ -128,6 +129,9 @@ button.close {
 }
 .panel-history {
   flex: 1;
+}
+.spacer {
+  margin: 0 30px;
 }
 
 .config {

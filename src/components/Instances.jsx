@@ -1,15 +1,20 @@
 import PropTypes from "prop-types";
 
-const Instances = ({ closeInstance, instanceInfo, initConfigInfo }) => {
+const Instances = ({
+  closeInstance,
+  instanceInfo,
+  initConfigInfo,
+  history,
+}) => {
   // Extract headers from the instancesData file
   const headerData = Object.keys(instanceInfo[0]);
-
+  console.log("history", history);
   const compareConfigValues = (a, b) => {
     return a != b ? <td className="highlight">{a}</td> : <td>{a}</td>;
   };
 
   // Function to create table header row
-  const renderHeaderCol = () => {
+  const renderInstanceTableBody = () => {
     return headerData.map((header, index) => {
       const initialConfigValue =
         initConfigInfo[0][header] !== undefined
@@ -45,69 +50,32 @@ const Instances = ({ closeInstance, instanceInfo, initConfigInfo }) => {
                 <th>Latest Config</th>
               </tr>
             </thead>
-            <tbody>{renderHeaderCol()}</tbody>
+            <tbody>{renderInstanceTableBody()}</tbody>
           </table>
-
-          {/* <table className="table_instance">
-          <thead>
-            <th>
-              <td></td>
-            </th>
-            <th>
-              <td>Initial Config</td>
-            </th>
-            <th>
-              <td>Latest Config</td>
-            </th>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Instance ID</td>
-              <td>A</td>
-              <td>B</td>
-            </tr>
-            <tr>
-              <td>Host Name</td>
-              <td>A</td>
-              <td>B</td>
-            </tr>
-            <tr>
-              <td>Instance Type</td>
-              <td>A</td>
-              <td>B</td>
-            </tr>
-            <tr>
-              <td>IP Address</td>
-              <td>A</td>
-              <td>B</td>
-            </tr>
-            <tr>
-              <td>Availability Zone</td>
-              <td>A</td>
-              <td>B</td>
-            </tr>
-            <tr>
-              <td>RoleType</td>
-              <td>A</td>
-              <td>B</td>
-            </tr>
-            <tr>
-              <td>CreatorName</td>
-              <td>A</td>
-              <td>B</td>
-            </tr>
-            <tr>
-              <td>CreateDate</td>
-              <td>A</td>
-              <td>B</td>
-            </tr>
-          </tbody>
-        </table> */}
         </div>
       </div>
+      <div className="panel-instance-section spacer"></div>
       <div className="panel-instance-section panel-history">
-        <div className="panel-header">
+        <div className="panel-header panel-flex-col">
           <h2>History</h2>
+        </div>
+        <div className="config_container">
+          <table>
+            <thead>
+              <tr>
+                <th>Create Date</th>
+                <th>Creator Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              {history.map((history, index) => (
+                <tr key={index}>
+                  <td>{history.CreateDate}</td>
+                  <td>{history.CreatorName}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
       <div className="panel-header panel-flex-col">
@@ -123,5 +91,6 @@ Instances.propTypes = {
   closeInstance: PropTypes.func.isRequired,
   instanceInfo: PropTypes.array.isRequired,
   initConfigInfo: PropTypes.array.isRequired,
+  history: PropTypes.array,
 };
 export default Instances;

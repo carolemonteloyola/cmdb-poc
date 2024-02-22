@@ -61,5 +61,26 @@
     "NameOfCRecordForServer": "TestSQL-1MS001",
     "NameOfCRecordsAdditional": "none",
     "SQLVersion": "SQL2019_Dev"
+  },
+  {
+    "StackName": "WebAppStack",
+    "InstanceId": "i-0abc123def456ghi",
+    "InstanceType": "t2.micro",
+    "PrivateIP": "10.0.0.1",
+    "CreateDate": "2023-05-01T12:00:00Z",
+    "AZ": "us-west-2a",
+    "CreatorName": "John Doe The Second",
+    "HostName": "example-instance-1",
+    "RoleType": "dbsql",
+    "ConfigType": "TESTING-NO-MONITORING",
+    "DiskSizeOfDDrive": 1011,
+    "DiskSizeOfEDrive": 1011,
+    "DiskSizeOfFDrive": 1011,
+    "DiskSizeOfGDrive": 1011,
+    "DiskSizeOfMDrive": 1011,
+    "Environment": "INTEGRATION",
+    "NameOfCRecordForServer": "TestSQL-1MS001",
+    "NameOfCRecordsAdditional": "none",
+    "SQLVersion": "SQL2019_Dev"
   }
 ]
