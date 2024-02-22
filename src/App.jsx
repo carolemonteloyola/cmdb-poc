@@ -1,20 +1,39 @@
 import "./App.css";
 
+import InitConfigData from "./data/initialconfig.json";
 import Instances from "./components/Instances";
+import InstancesData from "./data/instances.json";
 import StacksList from "./components/StacksList";
 import { useState } from "react";
 
 function App() {
   const [showInstances, setShowInstances] = useState(false);
-  const [selectedRow, setSelectedRow] = useState(null);
+  const [selectedStackRow, setSelectedStackRow] = useState(null);
+  const [initConfigInfo, setInitConfigInfo] = useState([{}]);
+  const [instanceInfo, setInstanceInfo] = useState([{}]);
 
-  const handleClick = (rowId) => {
+  const handleStackClick = (StackName) => {
     setShowInstances(true);
-    setSelectedRow(rowId);
+    setSelectedStackRow(StackName);
+    setInitConfigInfo(queryInitConfigBasedOnStack(StackName));
+    setInstanceInfo(queryInstanceBasedOnStack(StackName));
   };
   const closeInstance = () => {
     setShowInstances(false);
-    setSelectedRow();
+    setSelectedStackRow();
+  };
+
+  // get Stack info (Initial Config) based on StackName
+  const queryInitConfigBasedOnStack = (StackName) => {
+    return InitConfigData.filter(
+      (instance) => instance.StackName === StackName
+    );
+  };
+
+  // get instance based on StackName
+  // TODO: get latest
+  const queryInstanceBasedOnStack = (StackName) => {
+    return InstancesData.filter((instance) => instance.StackName === StackName);
   };
 
   return (
@@ -24,8 +43,17 @@ function App() {
       </nav>
 
       <div className="container">
-        <StacksList handleClick={handleClick} selectedRow={selectedRow} />
-        {showInstances && <Instances closeInstance={closeInstance} />}
+        <StacksList
+          handleStackClick={handleStackClick}
+          selectedStackRow={selectedStackRow}
+        />
+        {showInstances && (
+          <Instances
+            closeInstance={closeInstance}
+            instanceInfo={instanceInfo}
+            initConfigInfo={initConfigInfo}
+          />
+        )}
       </div>
     </>
   );

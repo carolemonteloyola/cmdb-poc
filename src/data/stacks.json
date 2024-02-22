@@ -1,6 +1,5 @@
 [
   {
-    "id": "1",
     "StackName": "WebAppStack",
     "ConfigType": "Production",
     "Environment": "AWS",
@@ -9,7 +8,6 @@
     "CreatorName": "John Doe"
   },
   {
-    "id": "2",
     "StackName": "DataProcessingStack",
     "ConfigType": "Development",
     "Environment": "Azure",
@@ -18,30 +16,11 @@
     "CreatorName": "Jane Smith"
   },
   {
-    "id": "3",
     "StackName": "BackendServicesStack",
     "ConfigType": "Staging",
     "Environment": "Google Cloud",
     "SQLVersion": "SQL Server  2019",
     "Timestamp": "2023-04-03T12:00:00Z",
     "CreatorName": "Alice Johnson"
-  },
-  {
-    "id": "4",
-    "StackName": "FrontendInfrastructureStack",
-    "ConfigType": "Production",
-    "Environment": "AWS",
-    "SQLVersion": "MySQL  8.0",
-    "Timestamp": "2023-04-04T12:00:00Z",
-    "CreatorName": "Bob Brown"
-  },
-  {
-    "id": "5",
-    "StackName": "MonitoringServicesStack",
-    "ConfigType": "Development",
-    "Environment": "Azure",
-    "SQLVersion": "PostgreSQL  13",
-    "Timestamp": "2023-04-05T12:00:00Z",
-    "CreatorName": "Charlie Davis"
   }
 ]

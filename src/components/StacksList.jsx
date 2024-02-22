@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import stacksData from "../data/stacks.json";
 
-const StacksList = ({ handleClick, selectedRow }) => {
+const StacksList = ({ handleStackClick, selectedStackRow }) => {
   /*const [stacks, setStacks] = useState([]);
 
    useEffect(() => {
@@ -31,11 +31,11 @@ const StacksList = ({ handleClick, selectedRow }) => {
         <tbody>
           {stacksData.map((stack) => (
             <tr
-              key={stack.id}
-              className={selectedRow === stack.id ? "selected" : ""}
+              key={stack.StackName}
+              className={selectedStackRow === stack.StackName ? "selected" : ""}
             >
               <td>
-                <a href="#" onClick={() => handleClick(stack.id)}>
+                <a href="#" onClick={() => handleStackClick(stack.StackName)}>
                   {stack.StackName}
                 </a>
               </td>
@@ -53,8 +53,8 @@ const StacksList = ({ handleClick, selectedRow }) => {
 };
 
 StacksList.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  selectedRow: PropTypes.number,
+  handleStackClick: PropTypes.func.isRequired,
+  selectedStackRow: PropTypes.string,
 };
 
 export default StacksList;

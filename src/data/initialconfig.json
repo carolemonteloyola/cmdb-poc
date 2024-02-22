@@ -1,5 +1,7 @@
 [
   {
+    "StackName": "WebAppStack",
+    "Timestamp": "2023-04-01T12:00:00Z",
     "RoleType": "dbsql",
     "ConfigType": "TESTING-NO-MONITORING",
     "DiskSizeOfDDrive": 100,
@@ -13,6 +15,8 @@
     "SQLVersion": "SQL2019_Dev"
   },
   {
+    "StackName": "DataProcessingStack",
+    "Timestamp": "2023-04-02T12:00:00Z",
     "RoleType": "dbsql",
     "ConfigType": "TESTING-NO-MONITORING",
     "DiskSizeOfDDrive": 200,
@@ -26,6 +30,8 @@
     "SQLVersion": "SQL2019_Std"
   },
   {
+    "StackName": "BackendServicesStack",
+    "Timestamp": "2023-04-03T12:00:00Z",
     "RoleType": "dbsql",
     "ConfigType": "TESTING-NO-MONITORING",
     "DiskSizeOfDDrive": 300,
