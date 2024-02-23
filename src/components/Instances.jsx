@@ -45,32 +45,44 @@ const Instances = ({
   const headerData = Object.keys(initConfig[0]);
 
   // Compare Instance config table values
-  const compareConfigValues = (a, b) => {
-    return a != b ? <td className="highlight">{a}</td> : <td>{a}</td>;
+  const compareConfigValues = (hasInstanceChanges, a, b) => {
+    return hasInstanceChanges && a != b ? (
+      <td className="highlight">{a}</td>
+    ) : (
+      <td>{a}</td>
+    );
   };
 
   // Display Init and Latest Instances in table
   const renderInstanceTableBody = () => {
+    const hasInstanceChanges =
+      latestConfig !== undefined && latestConfig.length > 0 ? true : false;
+
     return headerData.map((header, index) => {
       const initialConfigValue =
         initConfig[0][header] !== undefined
           ? initConfig[0][header].toString()
           : "-";
-      let currentConfigValue = "-";
-      if (latestConfig !== undefined && latestConfig.length > 0) {
-        currentConfigValue =
-          latestConfig[0][header] !== undefined
-            ? latestConfig[0][header].toString()
-            : "-";
-      }
+      const currentConfigValue =
+        hasInstanceChanges && latestConfig[0][header] !== undefined
+          ? latestConfig[0][header].toString()
+          : "-";
 
       return (
         <tr key={index}>
           <td>
             <strong>{header}</strong>
           </td>
-          {compareConfigValues(initialConfigValue, currentConfigValue)}
-          {compareConfigValues(currentConfigValue, initialConfigValue)}
+          {compareConfigValues(
+            hasInstanceChanges,
+            initialConfigValue,
+            currentConfigValue
+          )}
+          {compareConfigValues(
+            hasInstanceChanges,
+            currentConfigValue,
+            initialConfigValue
+          )}
         </tr>
       );
     });

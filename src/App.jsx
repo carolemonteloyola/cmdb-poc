@@ -36,11 +36,13 @@ function App() {
     ).sort((a, b) => new Date(a.CreatedDate) - new Date(b.CreatedDate));
   };
 
+  // When one of the history rows is clicked
   const handleHistoryClick = (CreatedDate, CreatorName) => {
     setSelectedHistoryRow(CreatedDate);
     setHistoryData(queryHistoryDetails(CreatedDate, CreatorName));
   };
 
+  // When one of the history rows is clicked, show the entire object
   const queryHistoryDetails = (CreatedDate, CreatorName) => {
     return instanceInfo.find(
       (instance) =>
