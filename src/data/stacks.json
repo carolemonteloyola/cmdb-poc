@@ -1,26 +1,31 @@
 [
   {
     "StackName": "WebAppStack",
-    "ConfigType": "Production",
-    "Environment": "AWS",
-    "SQLVersion": "MySQL 8.0",
+    "ConfigType": "TESTING-NO-MONITORING",
+    "Environment": "Integration",
+    "SQLVersion": "SQL2019_Dev",
     "Timestamp": "2023-04-01T12:00:00Z",
-    "CreatorName": "John Doe"
+    "CreatorName": "John Doe",
+    "NameOfCRecordForServer": "TestSQL-1MS001",
+    "NameOfCRecordsAdditional": "none",
+    "RoleType": "dbsql"
   },
   {
     "StackName": "DataProcessingStack",
-    "ConfigType": "Development",
-    "Environment": "Azure",
-    "SQLVersion": "PostgreSQL  13",
+    "ConfigType": "TESTING-NO-MONITORING",
+    "Environment": "Production",
+    "SQLVersion": "SQL2019_Ent",
     "Timestamp": "2023-04-02T12:00:00Z",
-    "CreatorName": "Jane Smith"
+    "CreatorName": "Jane Smith",
+    "RoleType": "dbsql"
   },
   {
     "StackName": "BackendServicesStack",
-    "ConfigType": "Staging",
-    "Environment": "Google Cloud",
-    "SQLVersion": "SQL Server  2019",
+    "ConfigType": "TESTING-NO-MONITORING",
+    "Environment": "Integration",
+    "SQLVersion": "SQL2019_Dev",
     "Timestamp": "2023-04-03T12:00:00Z",
-    "CreatorName": "Alice Johnson"
+    "CreatorName": "Alice Johnson",
+    "RoleType": "dbsql"
   }
 ]

@@ -11,7 +11,8 @@ function App() {
   const [selectedStackRow, setSelectedStackRow] = useState(null);
   const [initConfigInfo, setInitConfigInfo] = useState([{}]);
   const [instanceInfo, setInstanceInfo] = useState([{}]);
-  const [history, setHistory] = useState([{}]);
+  const [selectedHistoryRow, setSelectedHistoryRow] = useState(null);
+  const [historyData, setHistoryData] = useState([{}]);
 
   // handle Stack click
   const handleStackClick = (StackName) => {
@@ -19,7 +20,6 @@ function App() {
     setSelectedStackRow(StackName);
     setInitConfigInfo(queryInitConfigBasedOnStack(StackName));
     setInstanceInfo(queryInstanceBasedOnStack(StackName));
-    setHistory(queryHistoryBasedOnStack(StackName));
   };
 
   // close instance
@@ -36,14 +36,24 @@ function App() {
   };
 
   // get Instance info based on StackName
-  // TODO: get latest
   const queryInstanceBasedOnStack = (StackName) => {
-    return InstancesData.filter((instance) => instance.StackName === StackName);
+    return InstancesData.filter(
+      (instance) => instance.StackName === StackName
+    ).sort((a, b) => new Date(b.CreatedDate) - new Date(a.CreatedDate));
   };
 
-  // get history based on Instance ID
-  const queryHistoryBasedOnStack = (StackName) => {
-    return InstancesData.filter((history) => history.StackName === StackName);
+  const handleHistoryClick = (CreatedDate, CreatorName) => {
+    setSelectedHistoryRow(CreatedDate);
+    setHistoryData(queryHistoryDetails(CreatedDate, CreatorName));
+    console.log("historyData", historyData);
+  };
+
+  const queryHistoryDetails = (CreatedDate, CreatorName) => {
+    return instanceInfo.find(
+      (instance) =>
+        instance.CreatedDate === CreatedDate &&
+        instance.CreatorName === CreatorName
+    );
   };
 
   return (
@@ -62,7 +72,9 @@ function App() {
             closeInstance={closeInstance}
             instanceInfo={instanceInfo}
             initConfigInfo={initConfigInfo}
-            history={history}
+            handleHistoryClick={handleHistoryClick}
+            selectedHistoryRow={selectedHistoryRow}
+            historyData={historyData}
           />
         )}
       </div>

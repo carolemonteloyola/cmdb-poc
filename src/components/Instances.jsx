@@ -4,11 +4,12 @@ const Instances = ({
   closeInstance,
   instanceInfo,
   initConfigInfo,
-  history,
+  handleHistoryClick,
+  selectedHistoryRow,
+  historyData,
 }) => {
   // Extract headers from the instancesData file
   const headerData = Object.keys(instanceInfo[0]);
-  console.log("history", history);
   const compareConfigValues = (a, b) => {
     return a != b ? <td className="highlight">{a}</td> : <td>{a}</td>;
   };
@@ -33,7 +34,6 @@ const Instances = ({
       );
     });
   };
-
   return (
     <div className="panel panel-flex panel-flex-row panel-instances">
       <div className="panel-instance-section panel-instances">
@@ -63,19 +63,40 @@ const Instances = ({
           <table>
             <thead>
               <tr>
-                <th>Create Date</th>
+                <th>Created Date</th>
                 <th>Creator Name</th>
               </tr>
             </thead>
             <tbody>
-              {history.map((history, index) => (
-                <tr key={index}>
-                  <td>{history.CreateDate}</td>
+              {instanceInfo.map((history) => (
+                <tr
+                  key={history.CreatedDate}
+                  className={
+                    selectedHistoryRow === history.CreatedDate ? "selected" : ""
+                  }
+                >
+                  <td>
+                    <a
+                      href="#"
+                      onClick={() =>
+                        handleHistoryClick(
+                          history.CreatedDate,
+                          history.CreatorName
+                        )
+                      }
+                    >
+                      {history.CreatedDate}
+                    </a>
+                  </td>
                   <td>{history.CreatorName}</td>
                 </tr>
               ))}
             </tbody>
           </table>
+
+          <div>
+            <textarea readOnly value={JSON.stringify(historyData, null, 2)} />{" "}
+          </div>
         </div>
       </div>
       <div className="panel-header panel-flex-col">
@@ -91,6 +112,8 @@ Instances.propTypes = {
   closeInstance: PropTypes.func.isRequired,
   instanceInfo: PropTypes.array.isRequired,
   initConfigInfo: PropTypes.array.isRequired,
-  history: PropTypes.array,
+  handleHistoryClick: PropTypes.func.isRequired,
+  selectedHistoryRow: PropTypes.string,
+  historyData: PropTypes.object.isRequired,
 };
 export default Instances;
