@@ -1,6 +1,5 @@
 import "./App.css";
 
-import InitConfigData from "./data/initialconfig.json";
 import Instances from "./components/Instances";
 import InstancesData from "./data/instances.json";
 import StacksList from "./components/StacksList";
@@ -11,8 +10,8 @@ function App() {
   const [selectedStackRow, setSelectedStackRow] = useState(null);
   const [initConfigInfo, setInitConfigInfo] = useState([{}]);
   const [instanceInfo, setInstanceInfo] = useState([{}]);
-  const [selectedHistoryRow, setSelectedHistoryRow] = useState(null);
-  const [historyData, setHistoryData] = useState([{}]);
+  const [selectedHistoryRow, setSelectedHistoryRow] = useState();
+  const [historyData, setHistoryData] = useState();
 
   // handle Stack click
   const handleStackClick = (StackName) => {
@@ -20,6 +19,10 @@ function App() {
     setSelectedStackRow(StackName);
     setInitConfigInfo(queryInitConfigBasedOnStack(StackName));
     setInstanceInfo(queryInstanceBasedOnStack(StackName));
+
+    //reset history selection
+    setSelectedHistoryRow();
+    setHistoryData();
   };
 
   // close instance
@@ -30,9 +33,9 @@ function App() {
 
   // get Stack info (Initial Config) based on StackName
   const queryInitConfigBasedOnStack = (StackName) => {
-    return InitConfigData.filter(
+    return InstancesData.filter(
       (instance) => instance.StackName === StackName
-    );
+    ).sort((a, b) => new Date(a.CreatedDate) - new Date(b.CreatedDate));
   };
 
   // get Instance info based on StackName

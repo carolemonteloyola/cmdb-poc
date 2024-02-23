@@ -21,9 +21,13 @@ const StacksList = ({ handleStackClick, selectedStackRow }) => {
         <thead>
           <tr>
             <th>StackName</th>
-            <th>ConfigType</th>
+            <th>AZ</th>
             <th>Environment</th>
             <th>SQLVersion</th>
+            <th>CRecordForServer</th>
+            <th>CRecordAdd</th>
+            <th>DiskSize</th>
+            <th>ConfigType</th>
             <th>Timestamp</th>
             <th>CreatorName</th>
           </tr>
@@ -39,9 +43,17 @@ const StacksList = ({ handleStackClick, selectedStackRow }) => {
                   {stack.StackName}
                 </a>
               </td>
-              <td>{stack.ConfigType}</td>
+              <td>{stack.AZ}</td>
               <td>{stack.Environment}</td>
               <td>{stack.SQLVersion}</td>
+              <td>{stack.NameOfCRecordForServer}</td>
+              <td>{stack.NameOfCRecordsAdditional}</td>
+              <td>
+                D: {stack.DiskSizeOfDDrive}, E: {stack.DiskSizeOfEDrive}, F:{" "}
+                {stack.DiskSizeOfFDrive}, G: {stack.DiskSizeOfGDrive}, M:{" "}
+                {stack.DiskSizeOfMDrive},
+              </td>
+              <td>{stack.ConfigType}</td>
               <td>{stack.Timestamp}</td>
               <td>{stack.CreatorName}</td>
             </tr>

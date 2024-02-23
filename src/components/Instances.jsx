@@ -93,10 +93,11 @@ const Instances = ({
               ))}
             </tbody>
           </table>
-
-          <div>
-            <textarea readOnly value={JSON.stringify(historyData, null, 2)} />{" "}
-          </div>
+          {historyData && (
+            <div>
+              <textarea readOnly value={JSON.stringify(historyData, null, 2)} />{" "}
+            </div>
+          )}
         </div>
       </div>
       <div className="panel-header panel-flex-col">

@@ -50,7 +50,7 @@
   {
     "StackName": "WebAppStack",
     "InstanceId": "i-0abc123def456ghi",
-    "InstanceType": "t2.micro",
+    "InstanceType": "r5.2xlarge",
     "PrivateIP": "10.0.0.1",
     "CreatedDate": "2023-05-01T12:00:00Z",
     "AvailabilityZone": "us-west-2a",
