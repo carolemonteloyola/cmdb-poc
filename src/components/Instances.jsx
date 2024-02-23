@@ -1,28 +1,69 @@
+import { useCallback, useEffect, useState } from "react";
+
 import PropTypes from "prop-types";
 
 const Instances = ({
   closeInstance,
   instanceInfo,
-  initConfigInfo,
+  selectedStackRow,
   handleHistoryClick,
   selectedHistoryRow,
   historyData,
 }) => {
+  const [initConfig, setInitConfig] = useState([{}]);
+  const [latestConfig, setLatestConfig] = useState([{}]);
+
+  const queryInitConfig = useCallback(
+    (StackName) => {
+      return instanceInfo
+        .filter((instance) => instance.StackName === StackName)
+        .sort((a, b) => new Date(a.CreatedDate) - new Date(b.CreatedDate));
+    },
+    [instanceInfo]
+  );
+
+  const queryLatestConfig = useCallback(
+    (StackName) => {
+      const StackInstances = instanceInfo
+        .filter((instance) => instance.StackName === StackName)
+        .sort((a, b) => new Date(b.CreatedDate) - new Date(a.CreatedDate));
+      if (StackInstances.length > 1) {
+        return StackInstances;
+      } else {
+        return [];
+      }
+    },
+    [instanceInfo]
+  );
+
+  useEffect(() => {
+    setInitConfig(queryInitConfig(selectedStackRow));
+    setLatestConfig(queryLatestConfig(selectedStackRow));
+  }, [queryInitConfig, queryLatestConfig, selectedStackRow]);
+
   // Extract headers from the instancesData file
-  const headerData = Object.keys(instanceInfo[0]);
+  const headerData = Object.keys(initConfig[0]);
+
+  // Compare Instance config table values
   const compareConfigValues = (a, b) => {
     return a != b ? <td className="highlight">{a}</td> : <td>{a}</td>;
   };
 
-  // Function to create table header row
+  // Display Init and Latest Instances in table
   const renderInstanceTableBody = () => {
     return headerData.map((header, index) => {
       const initialConfigValue =
-        initConfigInfo[0][header] !== undefined
-          ? initConfigInfo[0][header]
+        initConfig[0][header] !== undefined
+          ? initConfig[0][header].toString()
           : "-";
-      const currentConfigValue =
-        instanceInfo[0][header] !== undefined ? instanceInfo[0][header] : "-";
+      let currentConfigValue = "-";
+      if (latestConfig !== undefined && latestConfig.length > 0) {
+        currentConfigValue =
+          latestConfig[0][header] !== undefined
+            ? latestConfig[0][header].toString()
+            : "-";
+      }
+
       return (
         <tr key={index}>
           <td>
@@ -34,6 +75,7 @@ const Instances = ({
       );
     });
   };
+
   return (
     <div className="panel panel-flex panel-flex-row panel-instances">
       <div className="panel-instance-section panel-instances">
@@ -68,29 +110,35 @@ const Instances = ({
               </tr>
             </thead>
             <tbody>
-              {instanceInfo.map((history) => (
-                <tr
-                  key={history.CreatedDate}
-                  className={
-                    selectedHistoryRow === history.CreatedDate ? "selected" : ""
-                  }
-                >
-                  <td>
-                    <a
-                      href="#"
-                      onClick={() =>
-                        handleHistoryClick(
-                          history.CreatedDate,
-                          history.CreatorName
-                        )
-                      }
-                    >
-                      {history.CreatedDate}
-                    </a>
-                  </td>
-                  <td>{history.CreatorName}</td>
-                </tr>
-              ))}
+              {instanceInfo
+                .sort(
+                  (a, b) => new Date(b.CreatedDate) - new Date(a.CreatedDate)
+                )
+                .map((history) => (
+                  <tr
+                    key={history.CreatedDate}
+                    className={
+                      selectedHistoryRow === history.CreatedDate
+                        ? "selected"
+                        : ""
+                    }
+                  >
+                    <td>
+                      <a
+                        href="#"
+                        onClick={() =>
+                          handleHistoryClick(
+                            history.CreatedDate,
+                            history.CreatorName
+                          )
+                        }
+                      >
+                        {history.CreatedDate}
+                      </a>
+                    </td>
+                    <td>{history.CreatorName}</td>
+                  </tr>
+                ))}
             </tbody>
           </table>
           {historyData && (
@@ -112,9 +160,9 @@ const Instances = ({
 Instances.propTypes = {
   closeInstance: PropTypes.func.isRequired,
   instanceInfo: PropTypes.array.isRequired,
-  initConfigInfo: PropTypes.array.isRequired,
+  selectedStackRow: PropTypes.string.isRequired,
   handleHistoryClick: PropTypes.func.isRequired,
   selectedHistoryRow: PropTypes.string,
-  historyData: PropTypes.object.isRequired,
+  historyData: PropTypes.object,
 };
 export default Instances;

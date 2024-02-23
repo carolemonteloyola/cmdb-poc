@@ -8,7 +8,6 @@ import { useState } from "react";
 function App() {
   const [showInstances, setShowInstances] = useState(false);
   const [selectedStackRow, setSelectedStackRow] = useState(null);
-  const [initConfigInfo, setInitConfigInfo] = useState([{}]);
   const [instanceInfo, setInstanceInfo] = useState([{}]);
   const [selectedHistoryRow, setSelectedHistoryRow] = useState();
   const [historyData, setHistoryData] = useState();
@@ -17,8 +16,7 @@ function App() {
   const handleStackClick = (StackName) => {
     setShowInstances(true);
     setSelectedStackRow(StackName);
-    setInitConfigInfo(queryInitConfigBasedOnStack(StackName));
-    setInstanceInfo(queryInstanceBasedOnStack(StackName));
+    setInstanceInfo(queryInstanceInfo(StackName));
 
     //reset history selection
     setSelectedHistoryRow();
@@ -31,24 +29,16 @@ function App() {
     setSelectedStackRow();
   };
 
-  // get Stack info (Initial Config) based on StackName
-  const queryInitConfigBasedOnStack = (StackName) => {
+  // get Instance info based on StackName - Ascending
+  const queryInstanceInfo = (StackName) => {
     return InstancesData.filter(
       (instance) => instance.StackName === StackName
     ).sort((a, b) => new Date(a.CreatedDate) - new Date(b.CreatedDate));
   };
 
-  // get Instance info based on StackName
-  const queryInstanceBasedOnStack = (StackName) => {
-    return InstancesData.filter(
-      (instance) => instance.StackName === StackName
-    ).sort((a, b) => new Date(b.CreatedDate) - new Date(a.CreatedDate));
-  };
-
   const handleHistoryClick = (CreatedDate, CreatorName) => {
     setSelectedHistoryRow(CreatedDate);
     setHistoryData(queryHistoryDetails(CreatedDate, CreatorName));
-    console.log("historyData", historyData);
   };
 
   const queryHistoryDetails = (CreatedDate, CreatorName) => {
@@ -74,7 +64,7 @@ function App() {
           <Instances
             closeInstance={closeInstance}
             instanceInfo={instanceInfo}
-            initConfigInfo={initConfigInfo}
+            selectedStackRow={selectedStackRow}
             handleHistoryClick={handleHistoryClick}
             selectedHistoryRow={selectedHistoryRow}
             historyData={historyData}
