@@ -4,45 +4,54 @@ import PropTypes from "prop-types";
 
 const Instances = ({
   closeInstance,
-  instanceInfo,
   selectedStackRow,
   handleHistoryClick,
   selectedHistoryRow,
   historyData,
+  resultInstanceQuery,
 }) => {
   const [initConfig, setInitConfig] = useState([{}]);
   const [latestConfig, setLatestConfig] = useState([{}]);
 
   const queryInitConfig = useCallback(
     (StackName) => {
-      return instanceInfo
+      return resultInstanceQuery
         .filter((instance) => instance.StackName === StackName)
-        .sort((a, b) => new Date(a.CreatedDate) - new Date(b.CreatedDate));
+        .sort((a, b) => new Date(a.CreationDate) - new Date(b.CreationDate));
     },
-    [instanceInfo]
+    [resultInstanceQuery]
   );
 
   const queryLatestConfig = useCallback(
     (StackName) => {
-      const StackInstances = instanceInfo
+      return resultInstanceQuery
         .filter((instance) => instance.StackName === StackName)
-        .sort((a, b) => new Date(b.CreatedDate) - new Date(a.CreatedDate));
-      if (StackInstances.length > 1) {
-        return StackInstances;
-      } else {
-        return [];
-      }
+        .sort((a, b) => new Date(b.CreationDate) - new Date(a.CreationDate));
     },
-    [instanceInfo]
+    [resultInstanceQuery]
   );
 
   useEffect(() => {
     setInitConfig(queryInitConfig(selectedStackRow));
     setLatestConfig(queryLatestConfig(selectedStackRow));
-  }, [queryInitConfig, queryLatestConfig, selectedStackRow]);
+  }, [
+    queryInitConfig,
+    queryLatestConfig,
+    selectedStackRow,
+    resultInstanceQuery,
+  ]);
 
-  // Extract headers from the instancesData file
-  const headerData = Object.keys(initConfig[0]);
+  // Extract headers from the resultInstanceQuery file
+  let headerData = [];
+  if (initConfig.length > 0) {
+    headerData = Object.keys(initConfig[0]);
+  }
+
+  let hasInstanceChanges = [];
+  if (latestConfig.length > 0) {
+    hasInstanceChanges =
+      latestConfig !== undefined && latestConfig[0].length > 0 ? true : false;
+  }
 
   // Compare Instance config table values
   const compareConfigValues = (hasInstanceChanges, a, b) => {
@@ -55,9 +64,6 @@ const Instances = ({
 
   // Display Init and Latest Instances in table
   const renderInstanceTableBody = () => {
-    const hasInstanceChanges =
-      latestConfig !== undefined && latestConfig.length > 0 ? true : false;
-
     return headerData.map((header, index) => {
       const initialConfigValue =
         initConfig[0][header] !== undefined
@@ -117,20 +123,20 @@ const Instances = ({
           <table>
             <thead>
               <tr>
-                <th>Created Date</th>
+                <th>Creation Date</th>
                 <th>Creator Name</th>
               </tr>
             </thead>
             <tbody>
-              {instanceInfo
+              {resultInstanceQuery
                 .sort(
-                  (a, b) => new Date(b.CreatedDate) - new Date(a.CreatedDate)
+                  (a, b) => new Date(b.CreationDate) - new Date(a.CreationDate)
                 )
                 .map((history) => (
                   <tr
-                    key={history.CreatedDate}
+                    key={history.InstanceId}
                     className={
-                      selectedHistoryRow === history.CreatedDate
+                      selectedHistoryRow === history.InstanceId
                         ? "selected"
                         : ""
                     }
@@ -138,14 +144,9 @@ const Instances = ({
                     <td>
                       <a
                         href="#"
-                        onClick={() =>
-                          handleHistoryClick(
-                            history.CreatedDate,
-                            history.CreatorName
-                          )
-                        }
+                        onClick={() => handleHistoryClick(history.InstanceId)}
                       >
-                        {history.CreatedDate}
+                        {history.CreationDate}
                       </a>
                     </td>
                     <td>{history.CreatorName}</td>
@@ -171,10 +172,10 @@ const Instances = ({
 
 Instances.propTypes = {
   closeInstance: PropTypes.func.isRequired,
-  instanceInfo: PropTypes.array.isRequired,
   selectedStackRow: PropTypes.string.isRequired,
   handleHistoryClick: PropTypes.func.isRequired,
   selectedHistoryRow: PropTypes.string,
   historyData: PropTypes.object,
+  resultInstanceQuery: PropTypes.array.isRequired,
 };
 export default Instances;

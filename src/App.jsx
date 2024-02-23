@@ -1,22 +1,24 @@
 import "./App.css";
 
+import { useEffect, useState } from "react";
+
 import Instances from "./components/Instances";
-import InstancesData from "./data/instances.json";
 import StacksList from "./components/StacksList";
-import { useState } from "react";
 
 function App() {
   const [showInstances, setShowInstances] = useState(false);
   const [selectedStackRow, setSelectedStackRow] = useState(null);
-  const [instanceInfo, setInstanceInfo] = useState([{}]);
   const [selectedHistoryRow, setSelectedHistoryRow] = useState();
   const [historyData, setHistoryData] = useState();
+  const [instancesData, setInstancesData] = useState([]);
+  const [resultInstanceQuery, setResultInstanceQuery] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // handle Stack click
   const handleStackClick = (StackName) => {
     setShowInstances(true);
     setSelectedStackRow(StackName);
-    setInstanceInfo(queryInstanceInfo(StackName));
+    setResultInstanceQuery(queryInstanceInfo(StackName));
 
     //reset history selection
     setSelectedHistoryRow();
@@ -31,25 +33,39 @@ function App() {
 
   // get Instance info based on StackName - Ascending
   const queryInstanceInfo = (StackName) => {
-    return InstancesData.filter(
-      (instance) => instance.StackName === StackName
-    ).sort((a, b) => new Date(a.CreatedDate) - new Date(b.CreatedDate));
+    return instancesData
+      .filter((instance) => instance.StackName === StackName)
+      .sort((a, b) => new Date(a.CreationDate) - new Date(b.CreationDate));
   };
 
   // When one of the history rows is clicked
-  const handleHistoryClick = (CreatedDate, CreatorName) => {
-    setSelectedHistoryRow(CreatedDate);
-    setHistoryData(queryHistoryDetails(CreatedDate, CreatorName));
+  const handleHistoryClick = (InstanceId) => {
+    setSelectedHistoryRow(InstanceId);
+    setHistoryData(queryHistoryDetails(InstanceId));
   };
 
   // When one of the history rows is clicked, show the entire object
-  const queryHistoryDetails = (CreatedDate, CreatorName) => {
-    return instanceInfo.find(
-      (instance) =>
-        instance.CreatedDate === CreatedDate &&
-        instance.CreatorName === CreatorName
-    );
+  const queryHistoryDetails = (InstanceId) => {
+    return instancesData.find((instance) => instance.InstanceId === InstanceId);
   };
+
+  useEffect(() => {
+    setLoading(true);
+
+    fetch(
+      "https://82v3bvf62i.execute-api.us-west-2.amazonaws.com/cmdb-test/ci?type=instance"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const specificData = data.map((d) => d.data);
+        setInstancesData(specificData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <>
@@ -62,14 +78,15 @@ function App() {
           handleStackClick={handleStackClick}
           selectedStackRow={selectedStackRow}
         />
+        {loading && <div className="loading">Loading...</div>}
         {showInstances && (
           <Instances
             closeInstance={closeInstance}
-            instanceInfo={instanceInfo}
             selectedStackRow={selectedStackRow}
             handleHistoryClick={handleHistoryClick}
             selectedHistoryRow={selectedHistoryRow}
             historyData={historyData}
+            resultInstanceQuery={resultInstanceQuery}
           />
         )}
       </div>

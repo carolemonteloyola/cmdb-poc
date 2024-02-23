@@ -1,18 +1,7 @@
-/* import { useEffect, useState } from "react"; */
-
 import PropTypes from "prop-types";
 import stacksData from "../data/stacks.json";
 
 const StacksList = ({ handleStackClick, selectedStackRow }) => {
-  /*const [stacks, setStacks] = useState([]);
-
-   useEffect(() => {
-    fetch(stacksData)
-      .then((response) => response.json())
-      .then((data) => setStacks(data))
-      .catch((error) => console.error("Error fetching data:", error));
-  }); */
-
   return (
     <div className="panel panel-flex panel-flex-col panel-stacks">
       <h2>Stacks</h2>
@@ -29,7 +18,6 @@ const StacksList = ({ handleStackClick, selectedStackRow }) => {
             <th>DiskSize</th>
             <th>ConfigType</th>
             <th>Timestamp</th>
-            <th>CreatorName</th>
           </tr>
         </thead>
         <tbody>
@@ -55,7 +43,6 @@ const StacksList = ({ handleStackClick, selectedStackRow }) => {
               </td>
               <td>{stack.ConfigType}</td>
               <td>{stack.Timestamp}</td>
-              <td>{stack.CreatorName}</td>
             </tr>
           ))}
         </tbody>
